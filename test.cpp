@@ -163,7 +163,39 @@ void test_vecteurOperator(std::size_t nPASS)
         error = 0.;
     }
 
-    cout<<"Test 2 Operator *"<<endl;
+    cout<<"Test 2 Operator -"<<endl;
+    for(size_t i = 0; i < nPASS; i++)
+    {
+        constexpr size_t N = 1000;
+        vecteur<double, N> A,B,C;
+        for(size_t j =0; j< N; j++)
+        {
+            A[j] = dis(gen);
+            B[j] = dis(gen);
+        }
+        C = A-B;
+
+        for(size_t j =0; j< N; j++)
+        {
+            if(abs(C[j]-(A[j]-B[j]))>1e-10)
+            {
+                valid = false;
+                error = max(error,abs(C[j]-(A[j]-B[j])));
+            }
+        }
+    }
+    if(valid)
+    {
+        cout << "Test Passed"<<endl;
+    }
+    else
+    {
+        cout << "Test Failed, max error :"<<error<<endl;
+        valid = true;
+        error = 0.;
+    }
+
+    cout<<"Test 3 Operator *"<<endl;
     for(size_t i = 0; i < nPASS; i++)
     {
         constexpr size_t N = 1000;
