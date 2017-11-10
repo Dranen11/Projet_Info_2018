@@ -1,7 +1,7 @@
 #include "celestialBody.h"
 
 celestialBody::celestialBody(double mass, vecteur<double,3> coordinate, vecteur<double,3> speed)
-:mass(mass),coordinate(coordinate),speed(speed)
+:mass(mass),coordinate(coordinate),speed(speed), hasChange(true)
 {
 
 }

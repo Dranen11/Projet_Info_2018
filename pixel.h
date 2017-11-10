@@ -11,7 +11,11 @@ class celestialBody;
 class pixel
 {
 public:
-    pixel(ray r1, ray r2);
+    pixel(ray const& r1, ray const& r2);
+    void set_initR1(ray const& newRay);
+    void set_initR2(ray const& newRay);
+    ray get_initR1() const;
+    ray get_initR2() const;
     ray const& get_r1() const;
     ray const& get_r2() const;
     ray& get_r1();
@@ -29,7 +33,7 @@ protected:
 
     vecteur<double,3> light;
     bool blocked;
-    ray r1,r2;
+    ray r1,r2,initR1,initR2;
 };
 
 #endif // PIXEL_H

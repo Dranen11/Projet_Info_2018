@@ -31,9 +31,15 @@ public:
       return speed;
    }
 
+   bool get_hasChange() const
+   {
+       return hasChange;
+   }
+
 
 protected:
 
+   bool hasChange;
    double mass;
    vecteur<double,3> coordinate;
    vecteur<double,3> speed;

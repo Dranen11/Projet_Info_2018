@@ -3,10 +3,30 @@
 
 using namespace std;
 
-pixel::pixel(ray r1, ray r2)
-    :r1(r1), r2(r2)
+pixel::pixel(ray const& r1, ray const& r2)
+    :r1(r1), r2(r2), initR1(r1), initR2(r2)
 {
 
+}
+
+void pixel::set_initR1(ray const& newRay)
+{
+    initR1 = newRay;
+}
+
+void pixel::set_initR2(ray const& newRay)
+{
+    initR2 = newRay;
+}
+
+ray pixel::get_initR1() const
+{
+    return initR1;
+}
+
+ray pixel::get_initR2() const
+{
+    return initR2;
 }
 
 ray const& pixel::get_r1() const
@@ -52,12 +72,15 @@ void pixel::Blocked()
 void pixel::calculatePixel(std::vector<celestialBody const *> objectList, std::size_t maxIter)
 {
     std::size_t iter=0, localIter = 0;
+    blocked = false;
+    r1 = initR1;
+    r2 = initR2;
 
     sortObjectList(objectList);
     r1.updateRay();
     r2.updateRay();
 
-    while(localIter < objectList.size() && iter < maxIter)
+    while(localIter < objectList.size() && iter < maxIter && (!blocked))
     {
         if(r1.get_dirChangeLU() || r2.get_dirChangeLU())
         {

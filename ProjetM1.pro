@@ -5,16 +5,26 @@ CONFIG -= qt
 QMAKE_CXXFLAGS = -std=c++11
 
 SOURCES += main.cpp \
-    Source.cpp \
-    GravitationalLense.cpp \
-    Object.cpp \
-    PointGravitationalLense.cpp \
-    PointSource.cpp
+    observer.cpp \
+#    pointGravitationalLense.cpp \
+#    pointSource.cpp \
+#    gravitationalLense.cpp \
+#    source.cpp \
+    ray.cpp \
+    pixel.cpp \
+    test.cpp \
+    vecteur.cpp \
+    celestialBody.cpp
 
 HEADERS += \
-    Source.h \
-    GravitationalLense.h \
-    Object.h \
-    PointGravitationalLense.h \
-    PointSource.h
+    observer.h \
+#    pointSource.h \
+#    source.h \
+#    pointGravitationalLense.h \
+#    gravitationalLense.h \
+    vecteur.h \
+    ray.h \
+    pixel.h \
+    test.h \
+    celestialBody.h
 
