@@ -7,6 +7,7 @@
 class ray
 {
 public:
+    ray();
     ray(vecteur<double, 3> const& posSource, vecteur<double, 3> const& direction);
 
     vecteur<double, 3> const& get_posSource() const;

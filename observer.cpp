@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Observer::Observer(vecteur<double, 3> pointingVector, double fov, std::array<double,2> resolution)
+Observer::Observer(vecteur<double, 3> pointingVector, double fov, std::array<uint32_t,2> resolution)
     :pointingVector(pointingVector), fov(fov), resolution(resolution), isUpdate(false), maxIterImage(100)
 {
     newResolution();
@@ -30,14 +30,14 @@ vecteur<double, 3> Observer::get_pointingVector() const
     return pointingVector;
 }
 
-std::array<double,2> Observer::get_resolution() const
+std::array<uint32_t,2> Observer::get_resolution() const
 {
     return resolution;
 }
 
-void Observer::set_resolution(std::array<double,2> const& newResolution)
+void Observer::set_resolution(std::array<uint32_t,2> const& newRes)
 {
-    resolution = newResolution;
+    resolution = newRes;
     newResolution();
 }
 
@@ -64,7 +64,7 @@ void Observer::set_maxIterImage(size_t maxIter)
 
 std::vector<std::vector<vecteur<double,3>>> Observer::getImage()
 {
-    if(!isUpdate || resChange)
+    if(!isUpdate)
     {
         calculateImage();
     }
@@ -98,8 +98,8 @@ void Observer::newResolution()
 
 void Observer::changeView()
 {
-    vecteur<double,3> posSource = {0,0,0}, dir1, dir2;
-    array<double,3> aDir1, aDir2, aDirPixel, aPointer == pointingVector.getPolarCoordinate();
+    vecteur<double,3> posSource({0,0,0}), dir1, dir2;
+    array<double,3> aDir1, aDir2, aDirPixel, aPointer = pointingVector.getPolarCoordinate();
     double xparity = 1.-static_cast<double>(resolution[0] % 2);
     double yparity = 1.-static_cast<double>(resolution[1] % 2);
     double nx_half = static_cast<double>(resolution[0]/2);
@@ -137,6 +137,6 @@ void Observer::testUpdate()
 {
     for(size_t i = 0; i < objectList.size(); i++)
     {
-        isUpdate = isUpdate || !(objectList[i].get_hasChange());
+        isUpdate = isUpdate && !(objectList[i]->get_hasChange());
     }
 }

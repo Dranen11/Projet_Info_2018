@@ -6,6 +6,12 @@ ray::ray(vecteur<double, 3> const& posSource, vecteur<double, 3> const& directio
 
 }
 
+ray::ray()
+    :posSource({0.,0.,0.}), direction({0.,0.,0.}), distance(0.), dirChangeLU(true)
+{
+
+}
+
 vecteur<double, 3> const& ray::get_posSource() const
 {
     return posSource;

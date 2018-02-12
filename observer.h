@@ -10,19 +10,19 @@
 class Observer
 {
 public:
-    Observer(vecteur<double, 3> pointingVector, double fov, std::array<double,2> resolution);
+    Observer(vecteur<double, 3> pointingVector, double fov, std::array<uint32_t,2> resolution);
 
     void set_objectList(std::vector<celestialBody const *> const& newObjectList);
     std::vector<celestialBody const *> get_objectList() const;
     void set_pointingVector(vecteur<double, 3> const& newVector);
     vecteur<double, 3> get_pointingVector() const;
-    std::array<double,2> get_resolution() const;
-    void set_resolution(std::array<double,2> const& newResolution);
+    std::array<uint32_t,2> get_resolution() const;
+    void set_resolution(std::array<uint32_t,2> const& newResolution);
     double get_fov() const;
     void set_fov(double newFOV);
     size_t get_maxIterImage() const;
     void set_maxIterImage(size_t maxIter);
-    std::vector<std::vector<double>> getImage();
+    std::vector<std::vector<vecteur<double,3>>> getImage();
 
 protected:
     void calculateImage();
@@ -34,7 +34,7 @@ protected:
     size_t maxIterImage;
     bool isUpdate;
     std::vector<celestialBody const *> objectList;
-    std::array<double,2> resolution;
+    std::array<uint32_t,2> resolution;
     vecteur<double, 3> pointingVector;
     std::vector<std::vector<vecteur<double,3>>> image;
     std::vector<std::vector<pixel>> generatingImage;

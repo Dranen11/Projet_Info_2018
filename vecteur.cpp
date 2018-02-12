@@ -67,3 +67,15 @@ std::array<float,2> vecteur<float,2>::getPolarCoordinate() const
     result[1] = atan((*this)[1]/(*this)[0]);
     return result;
 }
+
+template<>
+double vecteur<double,3>::sum() const
+{
+    return (*this)[0]+(*this)[1]+(*this)[2];
+}
+
+template<>
+float vecteur<float,3>::sum() const
+{
+    return (*this)[0]+(*this)[1]+(*this)[2];
+}

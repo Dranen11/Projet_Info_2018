@@ -9,6 +9,11 @@ pixel::pixel(ray const& r1, ray const& r2)
 
 }
 
+pixel::pixel()
+{
+
+}
+
 void pixel::set_initR1(ray const& newRay)
 {
     initR1 = newRay;
@@ -76,7 +81,7 @@ void pixel::calculatePixel(std::vector<celestialBody const *> objectList, std::s
     r1 = initR1;
     r2 = initR2;
 
-    sortObjectList(objectList);
+    sortObjectList(objectList, NULL);
     r1.updateRay();
     r2.updateRay();
 
@@ -85,7 +90,7 @@ void pixel::calculatePixel(std::vector<celestialBody const *> objectList, std::s
         if(r1.get_dirChangeLU() || r2.get_dirChangeLU())
         {
             localIter = 0;
-            sortObjectList(objectList);
+            sortObjectList(objectList, objectList[localIter]);
             r1.updateRay();
             r2.updateRay();
         }
@@ -96,7 +101,7 @@ void pixel::calculatePixel(std::vector<celestialBody const *> objectList, std::s
     }
 }
 
-void pixel::sortObjectList(std::vector<const celestialBody*>& objectList)
+void pixel::sortObjectList(std::vector<const celestialBody*>& objectList, celestialBody const * last)
 {
     vecteur<double, 3> meanPosition = (r1.get_posSource()+r2.get_posSource())*0.5;
     std::vector<double> distance(objectList.size(),0.);
@@ -116,5 +121,9 @@ void pixel::sortObjectList(std::vector<const celestialBody*>& objectList)
                 std::swap<const celestialBody*>(objectList[j],objectList[j+1]);
             }
         }
+    }
+    if(objectList[0] == last)
+    {
+        std::swap<const celestialBody*>(objectList[0],objectList[objectList.size()-1]);
     }
 }

@@ -11,6 +11,7 @@ class celestialBody;
 class pixel
 {
 public:
+    pixel();
     pixel(ray const& r1, ray const& r2);
     void set_initR1(ray const& newRay);
     void set_initR2(ray const& newRay);
@@ -29,7 +30,7 @@ public:
     void calculatePixel(std::vector<celestialBody const *> objectList, std::size_t maxIter = 100);
 
 protected:
-    void sortObjectList(std::vector<celestialBody const *>& objectList);
+    void sortObjectList(std::vector<celestialBody const *>& objectList, celestialBody const * last);
 
     vecteur<double,3> light;
     bool blocked;
