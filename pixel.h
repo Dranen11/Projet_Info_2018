@@ -30,7 +30,7 @@ public:
     void calculatePixel(std::vector<celestialBody const *> objectList, std::size_t maxIter = 100);
 
 protected:
-    void sortObjectList(std::vector<celestialBody const *>& objectList, celestialBody const * last);
+    void sortObjectList(std::vector<celestialBody const *>& objectList, std::vector<bool>& valid, celestialBody const * last);
 
     vecteur<double,3> light;
     bool blocked;

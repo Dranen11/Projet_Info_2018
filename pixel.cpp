@@ -76,12 +76,13 @@ void pixel::Blocked()
 
 void pixel::calculatePixel(std::vector<celestialBody const *> objectList, std::size_t maxIter)
 {
+    std::vector<bool> valid(objectList.size(),true);
     std::size_t iter=0, localIter = 0;
     blocked = false;
     r1 = initR1;
     r2 = initR2;
 
-    sortObjectList(objectList, NULL);
+    sortObjectList(objectList, valid, NULL);
     r1.updateRay();
     r2.updateRay();
 
@@ -90,20 +91,23 @@ void pixel::calculatePixel(std::vector<celestialBody const *> objectList, std::s
         if(r1.get_dirChangeLU() || r2.get_dirChangeLU())
         {
             localIter = 0;
-            sortObjectList(objectList, objectList[localIter]);
+            sortObjectList(objectList, valid, objectList[localIter]);
             r1.updateRay();
             r2.updateRay();
         }
 
-        objectList[localIter]->update_pixel(*this);
-
+        if(valid[localIter])
+        {
+            objectList[localIter]->update_pixel(*this);
+        }
         iter++; localIter++;
     }
 }
 
-void pixel::sortObjectList(std::vector<const celestialBody*>& objectList, celestialBody const * last)
+void pixel::sortObjectList(std::vector<const celestialBody*>& objectList, std::vector<bool>& valid, celestialBody const * last)
 {
     vecteur<double, 3> meanPosition = (r1.get_posSource()+r2.get_posSource())*0.5;
+    vecteur<double, 3> meanDirection = (r1.get_direction()+r2.get_direction())*0.5;
     std::vector<double> distance(objectList.size(),0.);
 
     for(size_t i = 0; i < objectList.size(); i++)
@@ -122,8 +126,12 @@ void pixel::sortObjectList(std::vector<const celestialBody*>& objectList, celest
             }
         }
     }
+    for(size_t i = 0; i < objectList.size(); i++)
+    {
+        valid[i] = (vecteur<double,3>::scalarProduct(objectList[i]->getCoordinate(),meanDirection) > 0.);
+    }
     if(objectList[0] == last)
     {
-        std::swap<const celestialBody*>(objectList[0],objectList[objectList.size()-1]);
+        valid[0] = false;
     }
 }
