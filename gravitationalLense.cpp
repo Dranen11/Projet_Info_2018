@@ -27,20 +27,8 @@ void gravitationalLense::update_pixel(pixel& pixel2update) const
 void gravitationalLense::update_ray(ray &ray2update) const
 {
     array<vecteur<double,3>,3> newBase, originalBase = {vecteur<double,3>({1.,0.,0.}),vecteur<double,3>({0.,1.,0.}),vecteur<double,3>({0.,0.,1.})}; //base de la lentille
-    array<array<double,3>,3> polarCoordinateBase; //dans la base de la lentille
     newBase[2] = coordinate-ray2update.get_posSource(); //vecteur z dans la base de la lentille correspondant à l'axe source, lentille
     double distanceFromSource =  newBase[2].norm(); //distance lentille source
-
-    //creation des vecteurs de base x et y
-    newBase[2] /= distanceFromSource;
-    polarCoordinateBase[2] = newBase[2].getPolarCoordinate();
-    polarCoordinateBase[0] = polarCoordinateBase[2];
-    polarCoordinateBase[1] = polarCoordinateBase[2];
-    polarCoordinateBase[0][2] -= M_PI/2.;
-    polarCoordinateBase[0][1] += M_PI/2.;
-    polarCoordinateBase[1][1] += M_PI/2.;
-    newBase[0].setPolarCoordinate(polarCoordinateBase[0]);
-    newBase[1].setPolarCoordinate(polarCoordinateBase[1]);    newBase[2] /= distanceFromSource;
 
     if(abs(newBase[2][2])>0.01)
     {

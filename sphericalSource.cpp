@@ -53,7 +53,7 @@ void sphericalSource::update_pixel(pixel &pixel2update) const
     double x_overlap = max(0., min(origin[0]+diagonal[0], cpCoordinate[0]+radius) - max(origin[0], cpCoordinate[0]-radius));
     double y_overlap = max(0., min(origin[1]+diagonal[1], cpCoordinate[1]+radius) - max(origin[1], cpCoordinate[1]-radius));
     double overlapArea = x_overlap * y_overlap;
-    if(overlapArea > 0)
+    if(overlapArea > 0.)
     {
         pixel2update.addLight(luminosity);
     }

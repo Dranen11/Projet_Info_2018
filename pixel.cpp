@@ -77,6 +77,7 @@ void pixel::Blocked()
 void pixel::calculatePixel(std::vector<celestialBody const *> objectList, std::size_t maxIter)
 {
     std::vector<bool> valid(objectList.size(),true);
+    light = vecteur<double,3>({0.,0.,0.});
     std::size_t iter=0, localIter = 0;
     blocked = false;
     r1 = initR1;
