@@ -74,7 +74,6 @@ std::vector<std::vector<vecteur<double,3>>> Observer::getImage()
 
 void Observer::calculateImage()
 {
-    changeView();
     for(size_t i = 0; i < resolution[0]; i++)
     {
         for(size_t j = 0; j < resolution[1]; j++)
