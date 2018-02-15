@@ -2,9 +2,9 @@
 #define CELESTIALBODY_H
 
 #include "vecteur.h"
-#include "pixel.h"
+#include "ray.h"
 
-class pixel;
+class ray;
 
 class celestialBody
 {
@@ -14,7 +14,7 @@ public:
    virtual ~celestialBody();
 
    virtual void timeStep(double dt);
-   virtual void update_pixel(pixel& pixel2update) const = 0;
+   virtual void update_ray(ray& ray2update) const = 0;
 
    vecteur<double,3> getCoordinate() const
    {

@@ -17,13 +17,6 @@ gravitationalLense::gravitationalLense(double mass, vecteur<double,3> coordinate
 
 }
 
-void gravitationalLense::update_pixel(pixel& pixel2update) const
-{
-    update_ray(pixel2update.get_r1());
-    update_ray(pixel2update.get_r2());
-}
-
-
 void gravitationalLense::update_ray(ray &ray2update) const
 {
     array<vecteur<double,3>,3> newBase, originalBase = {vecteur<double,3>({1.,0.,0.}),vecteur<double,3>({0.,1.,0.}),vecteur<double,3>({0.,0.,1.})}; //base de la lentille

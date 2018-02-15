@@ -5,7 +5,6 @@
 #include <vector>
 #include "gravitationalLense.h"
 #include "vecteur.h"
-#include "pixel.h"
 
 class Observer
 {
@@ -37,7 +36,6 @@ protected:
     std::array<uint32_t,2> resolution;
     vecteur<double, 3> pointingVector;
     std::vector<std::vector<vecteur<double,3>>> image;
-    std::vector<std::vector<pixel>> generatingImage;
 };
 
 #endif // OBSERVER_H

@@ -8,7 +8,6 @@ QMAKE_CXXFLAGS += -std=c++11 -O2 -march=native
 SOURCES += main.cpp \
     observer.cpp \
     ray.cpp \
-    pixel.cpp \
     test.cpp \
     vecteur.cpp \
     celestialBody.cpp \
@@ -19,7 +18,6 @@ SOURCES += main.cpp \
 HEADERS += observer.h \
     vecteur.h \
     ray.h \
-    pixel.h \
     test.h \
     celestialBody.h \
     sphericalSource.h \
