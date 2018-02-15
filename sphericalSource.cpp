@@ -12,28 +12,48 @@ sphericalSource::sphericalSource(double mass, vecteur<double,3> coordinate, vect
 
 void sphericalSource::update_pixel(pixel &pixel2update) const
 {
-    vecteur<double,3> meanPos = 0.5*(pixel2update.get_r1().get_posSource()+pixel2update.get_r2().get_posSource());
-    vecteur<double,3> dirSource = coordinate-meanPos;
+    vecteur<double,3> meanPos = 0.5*(pixel2update.get_r1().get_posSource()+pixel2update.get_r2().get_posSource()), cpCoordinate = coordinate;
+    vecteur<double,3> dirSource = coordinate-meanPos, dirR1 = pixel2update.get_r1().get_direction(), dirR2 = pixel2update.get_r2().get_direction();
 
-    vecteur<double,3> dir1 = pixel2update.get_r1().get_posSource()+pixel2update.get_r1().get_direction()-meanPos;
-    vecteur<double,3> dir2 = pixel2update.get_r2().get_posSource()+pixel2update.get_r2().get_direction()-meanPos;
-    dir1 *= (dirSource.norm()/dir1.norm());
-    dir2 *= (dirSource.norm()/dir2.norm());
+    array<vecteur<double,3>,3> newBase; //base de la lentille
+    newBase[2] = dirSource; //vecteur z dans la base de la lentille correspondant à l'axe source, lentille
+    double distanceFromSource =  newBase[2].norm(); //distance lentille source
+    newBase[2] /= distanceFromSource;
 
-    array<double,3> aDir1 = dir1.getPolarCoordinate(), aDir2 = dir2.getPolarCoordinate(), aDirSource = dirSource.getPolarCoordinate();
-    double angleRadius = atan(radius/aDirSource[0]);
+    if(abs(newBase[2][2])>0.01)
+    {
+        newBase[1][1] = 1.;
+        newBase[1][0] = 0.;
+        newBase[1][2] = newBase[2][1]/newBase[2][2];
+        newBase[1] /= newBase[1].norm();
+    }
+    else if(abs(newBase[2][0])>0.01)
+    {
+        newBase[1][2] = 1.;
+        newBase[1][1] = 0.;
+        newBase[1][0] = newBase[2][2]/newBase[2][0];
+        newBase[1] /= newBase[1].norm();
+    }
+    else
+    {
+        newBase[1][2] = 1.;
+        newBase[1][0] = 0.;
+        newBase[1][1] = newBase[2][2]/newBase[2][1];
+        newBase[1] /= newBase[1].norm();
+    }
+    newBase[0] = vecteur<double,3>::vectorProduct(newBase[1],newBase[2]);
 
-    bool testCorner1 = (aDirSource[1]-angleRadius) > aDir1[1] && (aDirSource[1]-angleRadius) < aDir2[1] && (aDirSource[2]-angleRadius) > aDir1[2] && (aDirSource[2]-angleRadius) > aDir2[2];
-    bool testCorner2 = (aDirSource[1]-angleRadius) > aDir1[1] && (aDirSource[1]-angleRadius) < aDir2[1] && (aDirSource[2]+angleRadius) > aDir1[2] && (aDirSource[2]+angleRadius) > aDir2[2];
-    bool testCorner3 = (aDirSource[1]+angleRadius) > aDir1[1] && (aDirSource[1]+angleRadius) < aDir2[1] && (aDirSource[2]-angleRadius) > aDir1[2] && (aDirSource[2]-angleRadius) > aDir2[2];
-    bool testCorner4 = (aDirSource[1]+angleRadius) > aDir1[1] && (aDirSource[1]+angleRadius) < aDir2[1] && (aDirSource[2]+angleRadius) > aDir1[2] && (aDirSource[2]+angleRadius) > aDir2[2];
-    bool testSegment1 = (aDirSource[1]+angleRadius) > aDir1[1] && (aDirSource[1]+angleRadius) < aDir2[1] && (aDirSource[2]-angleRadius) < aDir1[2] && (aDirSource[2]+angleRadius) > aDir2[2];
-    bool testSegment2 = (aDirSource[1]-angleRadius) > aDir1[1] && (aDirSource[1]-angleRadius) < aDir2[1] && (aDirSource[2]-angleRadius) < aDir1[2] && (aDirSource[2]+angleRadius) > aDir2[2];
-    bool testSegment3 = (aDirSource[2]+angleRadius) > aDir1[2] && (aDirSource[2]+angleRadius) < aDir2[2] && (aDirSource[1]-angleRadius) < aDir1[1] && (aDirSource[1]+angleRadius) > aDir2[1];
-    bool testSegment4 = (aDirSource[2]-angleRadius) > aDir1[2] && (aDirSource[2]-angleRadius) < aDir2[2] && (aDirSource[1]-angleRadius) < aDir1[1] && (aDirSource[1]+angleRadius) > aDir2[1];
-    bool testEnglobed = (aDirSource[1]-angleRadius) < aDir1[1] && (aDirSource[1]+angleRadius) > aDir2[1] && (aDirSource[2]-angleRadius) < aDir1[2] && (aDirSource[2]+angleRadius) > aDir2[2];
+    cpCoordinate.changeBase(newBase);
+    dirR1.changeBase(newBase);
+    dirR2.changeBase(newBase);
+    dirR1 *= distanceFromSource/dirR1[2];
+    dirR2 *= distanceFromSource/dirR2[2];
+    vecteur<double, 2> origin({min(dirR1[0],dirR2[0]),min(dirR1[1],dirR2[1])}), diagonal({abs(dirR1[0]-dirR2[0]),abs(dirR1[1]-dirR2[1])});
 
-    if(testCorner1 || testCorner2 || testCorner3 || testCorner4 || testSegment1 || testSegment2 || testSegment3 || testSegment4 || testEnglobed)
+    double x_overlap = max(0., min(origin[0]+diagonal[0], cpCoordinate[0]+radius) - max(origin[0], cpCoordinate[0]-radius));
+    double y_overlap = max(0., min(origin[1]+diagonal[1], cpCoordinate[1]+radius) - max(origin[1], cpCoordinate[1]-radius));
+    double overlapArea = x_overlap * y_overlap;
+    if(overlapArea > 0)
     {
         pixel2update.addLight(luminosity);
     }

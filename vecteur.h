@@ -20,6 +20,7 @@ public:
 
     static vecteur<T,N> multiplyElementWise(vecteur<T,N> const& A, vecteur<T,N> const& B);
     static T scalarProduct(vecteur<T,N> const& A, vecteur<T,N> const& B);
+    static vecteur<T,N> vectorProduct(vecteur<T,N> const& A, vecteur<T,N> const& B);
     static vecteur<T,N> createFromPolarCoordinate(std::array<T,N> const& coordinate);
 
     void changeBase(std::array<vecteur<T,N>,N> base);

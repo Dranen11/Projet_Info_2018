@@ -1,5 +1,6 @@
 #include "observer.h"
 
+
 using namespace std;
 
 Observer::Observer(vecteur<double, 3> pointingVector, double fov, std::array<uint32_t,2> resolution)

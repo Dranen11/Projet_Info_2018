@@ -22,14 +22,14 @@ unsigned char* convertImageRGB32(std::vector<std::vector<vecteur<double,3>>> con
         if(min < 0.) {min = cmin;}
     }
 
-    for(size_t i = 0; i < image.size(); i++)
+    for(size_t i = 0; i < n_row; i++)
     {
-        for(size_t j =  0; j < image.size(); j++)
+        for(size_t j =  0; j < n_column; j++)
         {
             vecteur<double, 3> color = calculateColor(image[i][j], luminosity[i][j]);
             for(size_t k = 0; k < 3; k++)
             {
-               final_image[i*n_column+j*4+k] = static_cast<unsigned char>(255.*color[k]*((luminosity[i][j]-min)/(max-min)));
+               final_image[i*n_column*4+j*4+k] = static_cast<unsigned char>(255.*color[k]*((luminosity[i][j]-min)/(max-min)));
             }
         }
     }
