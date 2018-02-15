@@ -2,6 +2,9 @@
 #include <array>
 #include <cmath>
 
+#include <QtCore>
+#include <QObject>
+
 using namespace std;
 
 sphericalSource::sphericalSource(double mass, vecteur<double,3> coordinate, vecteur<double,3> speed, vecteur<double,3> luminosity, double radius)
@@ -49,5 +52,6 @@ void sphericalSource::update_ray(ray& ray2update) const
     if(pow(dirR[0]-cpCoordinate[0],2.)+pow(dirR[1]-cpCoordinate[1],2.)<radius)
     {
         ray2update.addLight(luminosity);
+        qDebug() << 'luminosity';
     }
 }

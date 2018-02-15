@@ -24,4 +24,3 @@ HEADERS += observer.h \
     gravitationalLense.h \
     GUI/imageManipulation.h \
     task.h
-

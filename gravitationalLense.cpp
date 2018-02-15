@@ -61,8 +61,8 @@ void gravitationalLense::update_ray(ray &ray2update) const
     double deviationAngle = 4.*M_G*mass/(distance2Lense*M_C*M_C);
     double deviationAngleX = deviationAngle*(newDir[0]-cpCoordinate[0])/distance2Lense;
     double deviationAngleY = deviationAngle*(newDir[1]-cpCoordinate[1])/distance2Lense;
-    qDebug() << newDir[0] << " " << deviationAngleX*newDir[2];
-    qDebug() << newDir[1] << " " << deviationAngleY*newDir[2];
+    //qDebug() << newDir[0] << " " << deviationAngleX*newDir[2];
+    //qDebug() << newDir[1] << " " << deviationAngleY*newDir[2];
     newDir[0] -= deviationAngleX*newDir[2];
     newDir[1] -= deviationAngleY*newDir[2];
     newDir /= newDir.norm();
