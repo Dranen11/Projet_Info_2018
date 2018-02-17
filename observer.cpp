@@ -9,13 +9,13 @@ Observer::Observer(vecteur<double, 3> pointingVector, double fov, std::array<uin
     newResolution();
 }
 
-void Observer::set_objectList(std::vector<celestialBody const *> const& newObjectList)
+void Observer::set_objectList(std::vector<celestialBody*> const& newObjectList)
 {
     isUpdate = false;
     objectList = newObjectList;
 }
 
-std::vector<celestialBody const *> Observer::get_objectList() const
+std::vector<celestialBody*> Observer::get_objectList() const
 {
     return objectList;
 }

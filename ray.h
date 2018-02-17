@@ -22,11 +22,11 @@ public:
 
     void updateRay(vecteur<double, 3> const& new_posSource, vecteur<double, 3> const& new_direction);
     void updateRay();
-    vecteur<double,3> calculateRay(std::vector<celestialBody const *> objectList, std::size_t maxIter = 100);
+    vecteur<double,3> calculateRay(std::vector<celestialBody*> objectList, std::size_t maxIter = 100);
 
 
 protected:
-    void sortObjectList(std::vector<celestialBody const *>& objectList, std::vector<bool>& valid, celestialBody const * last);
+    void sortObjectList(std::vector<celestialBody*>& objectList, std::vector<bool>& valid, celestialBody* last);
 
     bool dirChangeLU;
     double distance;

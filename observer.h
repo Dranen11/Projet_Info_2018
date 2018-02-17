@@ -11,8 +11,8 @@ class Observer
 public:
     Observer(vecteur<double, 3> pointingVector, double fov, std::array<uint32_t,2> resolution);
 
-    void set_objectList(std::vector<celestialBody const *> const& newObjectList);
-    std::vector<celestialBody const *> get_objectList() const;
+    void set_objectList(std::vector<celestialBody *> const& newObjectList);
+    std::vector<celestialBody *> get_objectList() const;
     void set_pointingVector(vecteur<double, 3> const& newVector);
     vecteur<double, 3> get_pointingVector() const;
     std::array<uint32_t,2> get_resolution() const;
@@ -32,7 +32,7 @@ protected:
     double fov;
     size_t maxIterImage;
     bool isUpdate;
-    std::vector<celestialBody const *> objectList;
+    std::vector<celestialBody *> objectList;
     std::array<uint32_t,2> resolution;
     vecteur<double, 3> pointingVector;
     std::vector<std::vector<vecteur<double,3>>> image;

@@ -56,7 +56,7 @@ void ray::addLight(vecteur<double,3> newLight)
     light += newLight;
 }
 
-vecteur<double,3> ray::calculateRay(std::vector<celestialBody const *> objectList, std::size_t maxIter)
+vecteur<double,3> ray::calculateRay(std::vector<celestialBody*> objectList, std::size_t maxIter)
 {
     std::vector<bool> valid(objectList.size(),true);
     std::size_t iter=0, localIter = 0;
@@ -64,7 +64,7 @@ vecteur<double,3> ray::calculateRay(std::vector<celestialBody const *> objectLis
 
     sortObjectList(objectList, valid, NULL);
 
-    while(localIter < objectList.size() && iter < maxIter && light.norm() < std::numeric_limits<double>::min()*10.)
+    while(localIter < objectList.size() && iter < maxIter && light.norm2() < std::numeric_limits<double>::min()*10.)
     {
         if(dirChangeLU)
         {
@@ -83,7 +83,7 @@ vecteur<double,3> ray::calculateRay(std::vector<celestialBody const *> objectLis
     return light;
 }
 
-void ray::sortObjectList(std::vector<const celestialBody*>& objectList, std::vector<bool>& valid, celestialBody const * last)
+void ray::sortObjectList(std::vector<celestialBody*>& objectList, std::vector<bool>& valid, celestialBody* last)
 {
     std::vector<double> distance(objectList.size(),0.);
 
@@ -99,7 +99,7 @@ void ray::sortObjectList(std::vector<const celestialBody*>& objectList, std::vec
             if(distance[j]>distance[j+1])
             {
                 std::swap<double>(distance[j],distance[j+1]);
-                std::swap<const celestialBody*>(objectList[j],objectList[j+1]);
+                std::swap<celestialBody*>(objectList[j],objectList[j+1]);
             }
         }
     }
