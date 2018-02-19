@@ -1,5 +1,7 @@
 #include "observer.h"
 
+#include <QtCore>
+#include <QObject>
 
 using namespace std;
 
@@ -77,10 +79,16 @@ void Observer::calculateImage()
 
     vecteur<double,3> posSource({0,0,0});
     array<double,3> aPointer = pointingVector.getPolarCoordinate();
+    aPointer[2]=0.;
     double xparity = 1.-static_cast<double>(resolution[0] % 2);
     double yparity = 1.-static_cast<double>(resolution[1] % 2);
     double nx_half = static_cast<double>(resolution[0]/2);
     double ny_half = static_cast<double>(resolution[1]/2);
+    /*double ratio = static_cast<double>(resolution[1])/static_cast<double>(resolution[0]);
+    double yFov = sqrt(fov*fov/(ratio*ratio+1));
+    double xFov = yFov*ratio;
+    double xAngleRes = xFov/static_cast<double>(resolution[0]);
+    double yAngleRes = yFov/static_cast<double>(resolution[1]);*/
     double xAngleRes = fov/static_cast<double>(resolution[0]);
     double yAngleRes = fov/static_cast<double>(resolution[1]);
 
@@ -92,6 +100,8 @@ void Observer::calculateImage()
             array<double,3> aDir = aPointer;
             aDir[1] += yAngleRes*(static_cast<double>(j)-ny_half+0.5*yparity);
             aDir[2] += xAngleRes*(static_cast<double>(i)-nx_half+0.5*xparity);
+
+            qDebug() <<aDir[0] <<" "<< aDir[1] << " " << aDir[2];
 
             dir.setPolarCoordinate(aDir);
 

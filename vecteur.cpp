@@ -68,13 +68,13 @@ std::array<float,3> vecteur<float,3>::getPolarCoordinate() const
         {
             result[2] = atan((*this)[1]/(*this)[0]);
         }
-        else if((*this)[0]>0.)
+        else if((*this)[0]<0.)
         {
-            result[2] = M_PI/2.;
+            result[2] = -M_PI/2.;
         }
         else
         {
-            result[2] = -M_PI/2.;
+            result[2] = M_PI/2.;
         }
     }
     return result;
@@ -129,7 +129,7 @@ double vecteur<double,3>::scalarProduct(vecteur<double,3> const& A, vecteur<doub
 template<>
 double vecteur<double,3>::norm2() const
 {
-    return (*this)[0]*(*this)[0]+(*this)[1]*(*this)[1]+(*this)[1]*(*this)[1];
+    return ((*this)[0]*(*this)[0])+((*this)[1]*(*this)[1])+((*this)[2]*(*this)[2]);
 }
 
 template<>
@@ -141,5 +141,5 @@ float vecteur<float,3>::scalarProduct(vecteur<float,3> const& A, vecteur<float,3
 template<>
 float vecteur<float,3>::norm2() const
 {
-    return (*this)[0]*(*this)[0]+(*this)[1]*(*this)[1]+(*this)[1]*(*this)[1];
+    return ((*this)[0]*(*this)[0])+((*this)[1]*(*this)[1])+((*this)[2]*(*this)[2]);
 }

@@ -5,7 +5,7 @@
 #include <QCoreApplication>
 #include "task.h"
 
-/*
+
 int main (int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -21,8 +21,8 @@ int main (int argc, char *argv[])
     QTimer::singleShot(0, task, SLOT(run()));
     return a.exec();
 }
-*/
 
+/*
 int main (int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -33,3 +33,4 @@ int main (int argc, char *argv[])
     b.show();
     return a.exec();
 }
+*/

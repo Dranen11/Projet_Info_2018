@@ -30,7 +30,8 @@ HEADERS += observer.h \
     GUI/displaywindow.h \
     GUI/form.h \
     GUI/frameorientation.h \
-    GUI/QScienceSpinBox.h
+    GUI/QScienceSpinBox.h \
+    matrix.h
 
 FORMS += \
     GUI/form.ui

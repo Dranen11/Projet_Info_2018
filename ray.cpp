@@ -103,10 +103,10 @@ void ray::sortObjectList(std::vector<celestialBody*>& objectList, std::vector<bo
             }
         }
     }
-    for(size_t i = 0; i < objectList.size(); i++)
+    /*for(size_t i = 0; i < objectList.size(); i++)
     {
-        valid[i] = (vecteur<double,3>::scalarProduct(objectList[i]->getCoordinate(),direction) > 0.);
-    }
+        valid[i] = (vecteur<double,3>::scalarProduct(objectList[i]->getCoordinate()-posSource,direction) > 0.);
+    }*/
     if(objectList[0] == last)
     {
         valid[0] = false;

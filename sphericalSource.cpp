@@ -49,7 +49,7 @@ void sphericalSource::update_ray(ray& ray2update) const
     cpCoordinate.changeBase(newBase);
     dirR.changeBase(newBase);
     dirR *= distanceFromSource/dirR[2];
-    if(pow(dirR[0]-cpCoordinate[0],2.)+pow(dirR[1]-cpCoordinate[1],2.)<radius)
+    if(pow(dirR[0]-cpCoordinate[0],2.)+pow(dirR[1]-cpCoordinate[1],2.)<(radius*radius))
     {
         ray2update.addLight(luminosity);
         qDebug() << 'luminosity';
