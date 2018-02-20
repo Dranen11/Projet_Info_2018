@@ -27,6 +27,7 @@ public:
 
 protected:
     void sortObjectList(std::vector<celestialBody*>& objectList, std::vector<bool>& valid, celestialBody* last);
+    double intersectPlane(vecteur<double,3> const& normal) const;
 
     bool dirChangeLU;
     double distance;

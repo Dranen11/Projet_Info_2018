@@ -1,5 +1,8 @@
 #include "ray.h"
 #include <limits>
+#include <cmath>
+
+using namespace std;
 
 ray::ray(vecteur<double, 3> const& posSource, vecteur<double, 3> const& direction)
     :posSource(posSource), direction(direction), distance(0.), dirChangeLU(true), light({0.,0.,0.})
@@ -83,13 +86,23 @@ vecteur<double,3> ray::calculateRay(std::vector<celestialBody*> objectList, std:
     return light;
 }
 
+double ray::intersectPlane(vecteur<double,3> const& normal) const
+{
+    double normalNorm = normal.norm(), denom = vecteur<double,3>::scalarProduct(direction,normal)/normalNorm, distIntersect = -1.;
+    if(abs(denom) > std::numeric_limits<double>::min()*1.e30) {
+        distIntersect = normalNorm/denom;
+    }
+    return distIntersect;
+}
+
 void ray::sortObjectList(std::vector<celestialBody*>& objectList, std::vector<bool>& valid, celestialBody* last)
 {
     std::vector<double> distance(objectList.size(),0.);
+    bool first = true;
 
     for(size_t i = 0; i < objectList.size(); i++)
     {
-        distance[i] = (posSource-objectList[i]->getCoordinate()).norm();
+        distance[i] = intersectPlane(objectList[i]->getCoordinate()-posSource);
     }
 
     for(size_t i = 0; i<objectList.size();i++)
@@ -103,12 +116,15 @@ void ray::sortObjectList(std::vector<celestialBody*>& objectList, std::vector<bo
             }
         }
     }
-    /*for(size_t i = 0; i < objectList.size(); i++)
+    for(size_t i = 0; i < objectList.size(); i++)
     {
-        valid[i] = (vecteur<double,3>::scalarProduct(objectList[i]->getCoordinate()-posSource,direction) > 0.);
-    }*/
-    if(objectList[0] == last)
-    {
-        valid[0] = false;
+        valid[i] = (distance[i] > 0.);
+        if(first && distance[i] > 0.) {
+            if(objectList[i] == last)
+            {
+                valid[i] = false;
+            }
+            first = false;
+        }
     }
 }

@@ -31,7 +31,7 @@ frameOrientation::frameOrientation(double initFov, vecteur<double,3> initPointin
     connect(fovBox,SIGNAL(valueChanged(double)),this,SLOT(changeFov()));
 
     //PointingFrame initialisation
-    array<double, 3> initPointer = initPointing.getPolarCoordinate();
+    array<double, 3> initPointer = initPointing.getAngularCoordinate();
 
     pointingLayout = new QGridLayout;
     pointingFrame->setLayout(pointingLayout);
@@ -118,22 +118,22 @@ frameOrientation::~frameOrientation()
 
 void frameOrientation::leftTurn()
 {
-    phiBox->setValue(phiBox->value()+PERCENT_FOV*fovBox->value());
+    thetaBox->setValue(thetaBox->value()+PERCENT_FOV*fovBox->value());
 }
 
 void frameOrientation::rightTurn()
 {
-    phiBox->setValue(phiBox->value()-PERCENT_FOV*fovBox->value());
+    thetaBox->setValue(thetaBox->value()-PERCENT_FOV*fovBox->value());
 }
 
 void frameOrientation::upTurn()
 {
-    thetaBox->setValue(thetaBox->value()+PERCENT_FOV*fovBox->value());
+    phiBox->setValue(phiBox->value()+PERCENT_FOV*fovBox->value());
 }
 
 void frameOrientation::downTurn()
 {
-    thetaBox->setValue(thetaBox->value()-PERCENT_FOV*fovBox->value());
+    phiBox->setValue(phiBox->value()-PERCENT_FOV*fovBox->value());
 }
 
 void frameOrientation::zoomIn()
@@ -150,7 +150,7 @@ void frameOrientation::changePointing()
 {
     array<double, 3> initPointer = {1.,thetaBox->value(),phiBox->value()};
     vecteur<double, 3> result;
-    result.createFromPolarCoordinate(initPointer);
+    result.setAngularCoordinate(initPointer);
     emit pointingChange(result);
 }
 

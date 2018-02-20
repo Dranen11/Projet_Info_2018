@@ -31,8 +31,8 @@ public slots:
         sphericalSource star2(2.e30,vecteur<double,3>({0.,0.,2.4e20}),vecteur<double,3>({0.,0.,0.}),vecteur<double,3>({1.,1.,1.}),3.e11);
         gravitationalLense body(2.e30,vecteur<double,3>({0.,0.,1.2e20}),vecteur<double,3>({0,0,0}));
         Observer obs(vecteur<double,3>({0.,0.,1.}),1e-8,{DX,DY});
-        //obs.set_objectList({&star, &body});
-        obs.set_objectList({&star2});
+        obs.set_objectList({&star, &body});
+        //obs.set_objectList({&star2});
         std::vector<std::vector<vecteur<double,3>>> im = obs.getImage();
         unsigned char* image = convertImageRGB32(obs.getImage());
 
@@ -51,7 +51,7 @@ public slots:
         }
 
         QImage rendu(image, DX, DY, QImage::Format_RGB32);
-        rendu.save("test.jpg");
+        rendu.save("test.bmp");
         delete image;
         emit finished();
     }

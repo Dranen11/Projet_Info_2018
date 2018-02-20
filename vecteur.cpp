@@ -1,4 +1,5 @@
 #include "vecteur.h"
+#include <limits>
 
 template<>
 void vecteur<double,3>::setPolarCoordinate(std::array<double,3> const& coordinate)
@@ -142,4 +143,53 @@ template<>
 float vecteur<float,3>::norm2() const
 {
     return ((*this)[0]*(*this)[0])+((*this)[1]*(*this)[1])+((*this)[2]*(*this)[2]);
+}
+
+template<>
+std::array<double,3> vecteur<double,3>::getAngularCoordinate() const
+{
+    std::array<double,3> result;
+    result[0] = this->norm();
+    result[2] = asin((*this)[0]/result[0]);
+    double cosPhi = cos(result[2]);
+    if(abs(cosPhi) > 1e-15) {
+        result[1] = asin((*this)[1]/(result[0]*cosPhi));
+    }
+    else {
+        result[1] = 0.;
+    }
+    return result;
+}
+
+
+template<>
+std::array<float,3> vecteur<float,3>::getAngularCoordinate() const
+{
+    std::array<float,3> result;
+    result[0] = this->norm();
+    result[2] = asin((*this)[0]/result[0]);
+    float cosPhi = cos(result[2]);
+    if(abs(cosPhi) > 1e-15) {
+        result[1] = asin((*this)[1]/(result[0]*cosPhi));
+    }
+    else {
+        result[1] = 0.;
+    }
+    return result;
+}
+
+template<>
+void vecteur<float,3>::setAngularCoordinate(const std::array<float, 3> &coordinate)
+{
+    (*this)[0] = coordinate[0]*sin(coordinate[2]);
+    (*this)[1] = coordinate[0]*sin(coordinate[1])*cos(coordinate[2]);
+    (*this)[2] = coordinate[0]*cos(coordinate[1])*cos(coordinate[2]);
+}
+
+template<>
+void vecteur<double,3>::setAngularCoordinate(const std::array<double, 3> &coordinate)
+{
+    (*this)[0] = coordinate[0]*sin(coordinate[2]);
+    (*this)[1] = coordinate[0]*sin(coordinate[1])*cos(coordinate[2]);
+    (*this)[2] = coordinate[0]*cos(coordinate[1])*cos(coordinate[2]);
 }
