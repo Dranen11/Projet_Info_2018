@@ -25,21 +25,21 @@ void gravitationalLense::update_ray(ray &ray2update) const
     {
         newBase[1][1] = 1.;
         newBase[1][0] = 0.;
-        newBase[1][2] = newBase[2][1]/newBase[2][2];
+        newBase[1][2] = -newBase[2][1]/newBase[2][2];
         newBase[1] /= newBase[1].norm();
     }
     else if(abs(newBase[2][0])>0.01)
     {
         newBase[1][2] = 1.;
         newBase[1][1] = 0.;
-        newBase[1][0] = newBase[2][2]/newBase[2][0];
+        newBase[1][0] = -newBase[2][2]/newBase[2][0];
         newBase[1] /= newBase[1].norm();
     }
     else
     {
         newBase[1][2] = 1.;
         newBase[1][0] = 0.;
-        newBase[1][1] = newBase[2][2]/newBase[2][1];
+        newBase[1][1] = -newBase[2][2]/newBase[2][1];
         newBase[1] /= newBase[1].norm();
     }
     newBase[0] = vecteur<double,3>::vectorProduct(newBase[1],newBase[2]);
@@ -55,14 +55,14 @@ void gravitationalLense::update_ray(ray &ray2update) const
 
     newDir *= distanceFromSource/newDir[2]; //vecteur position de l'intersection rayon plan lentille
     newPos += newDir;
-    double distance2Lense = sqrt(pow(newDir[0]-cpCoordinate[0],2)+pow(newDir[1]-cpCoordinate[1],2));
+    double distance2Lense = sqrt(pow(newDir[0]-cpCoordinate[0],2.)+pow(newDir[1]-cpCoordinate[1],2.));
     double deviationAngle = 4.*M_G*mass/(distance2Lense*M_C*M_C);
     double deviationAngleX = deviationAngle*(newDir[0]-cpCoordinate[0])/distance2Lense;
     double deviationAngleY = deviationAngle*(newDir[1]-cpCoordinate[1])/distance2Lense;
 
     newDir *= 2.;
-    newDir[0] -= deviationAngleX*newDir[2];
-    newDir[1] -= deviationAngleY*newDir[2];
+    newDir[0] -= deviationAngleX*newDir[2]/2.;
+    newDir[1] -= deviationAngleY*newDir[2]/2.;
     newDir /= newDir.norm();
     newDir.changeBase(originalBase);
     newPos.changeBase(originalBase);
