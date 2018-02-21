@@ -34,21 +34,21 @@ void gravitationalLense::update_ray(ray &ray2update) const
     {
         newBase[1][1] = 1.;
         newBase[1][0] = 0.;
-        newBase[1][2] = newBase[2][1]/newBase[2][2];
+        newBase[1][2] = -newBase[2][1]/newBase[2][2];
         newBase[1] /= newBase[1].norm();
     }
     else if(abs(newBase[2][0])>0.01)
     {
         newBase[1][2] = 1.;
         newBase[1][1] = 0.;
-        newBase[1][0] = newBase[2][2]/newBase[2][0];
+        newBase[1][0] = -newBase[2][2]/newBase[2][0];
         newBase[1] /= newBase[1].norm();
     }
     else
     {
         newBase[1][2] = 1.;
         newBase[1][0] = 0.;
-        newBase[1][1] = newBase[2][2]/newBase[2][1];
+        newBase[1][1] = -newBase[2][2]/newBase[2][1];
         newBase[1] /= newBase[1].norm();
     }
     newBase[0] = vecteur<double,3>::vectorProduct(newBase[1],newBase[2]);
