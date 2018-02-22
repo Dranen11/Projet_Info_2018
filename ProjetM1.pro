@@ -2,7 +2,7 @@ TEMPLATE = app
 CONFIG += console c++11
 QT += core gui
 
-QMAKE_CXXFLAGS += -std=c++11 -O2 -march=native
+QMAKE_CXXFLAGS += -std=c++11 #-O2 -march=native
 
 SOURCES += main.cpp \
     observer.cpp \

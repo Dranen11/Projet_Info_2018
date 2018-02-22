@@ -12,8 +12,8 @@
 #include <QObject>
 
 
-#define DX 100
-#define DY 100
+#define DX 3000
+#define DY 3000
 
 using namespace std;
 
@@ -30,9 +30,9 @@ public slots:
         sphericalSource star(2.e30,vecteur<double,3>({0.,0.,2.4e20}),vecteur<double,3>({0.,0.,0.}),vecteur<double,3>({1.,1.,1.}),3.e11);
         sphericalSource star2(2.e30,vecteur<double,3>({0.,0.,2.4e20}),vecteur<double,3>({0.,0.,0.}),vecteur<double,3>({1.,1.,1.}),3.e11);
         gravitationalLense body(2.e30,vecteur<double,3>({0.,5.e-12,1.2e20}),vecteur<double,3>({0,0,0}));
-        Observer obs(vecteur<double,3>({0.,0.,1.}),1e-7,{DX,DY});
-        obs.set_objectList({&star, &body});
-        //obs.set_objectList({&star2});
+        Observer obs(vecteur<double,3>({0.,0.,1.}),1e-8,{DX,DY},16);
+        //obs.set_objectList({&star, &body});
+        obs.set_objectList({&star2});
         unsigned char* image = convertImageRGB32(obs.getImage());
 
         QImage rendu(image, DX, DY, QImage::Format_RGB32);
