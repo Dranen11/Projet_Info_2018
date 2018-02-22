@@ -55,6 +55,7 @@ void gravitationalLense::update_ray(ray &ray2update) const
 
     newDir *= distanceFromSource/newDir[2]; //vecteur position de l'intersection rayon plan lentille
     newPos += newDir;
+
     double distance2Lense = sqrt(pow(newDir[0]-cpCoordinate[0],2.)+pow(newDir[1]-cpCoordinate[1],2.));
     double deviationAngle = 4.*M_G*mass/(distance2Lense*M_C*M_C);
     double deviationAngleX = deviationAngle*(newDir[0]-cpCoordinate[0])/distance2Lense;
