@@ -1,8 +1,7 @@
 #include "gravitationalLense.h"
 #include <cmath>
 
-#define M_G 6.67408e-11
-#define M_C 299792458.
+
 
 
 using namespace std;
@@ -19,7 +18,7 @@ void gravitationalLense::update_ray(ray& ray2update, celestialBody* next) const
     if(next != NULL)
     {
         double distance2Lense = sqrt(pow(ray2update.get_actualPos()[0]-coordinate[0],2.)+pow(ray2update.get_actualPos()[1]-coordinate[1],2.));
-        double deviationAngle = 4.*M_G*mass/(distance2Lense*M_C*M_C);
+        double deviationAngle = 4.*C_G*mass/(distance2Lense*C_C*C_C);
         double deviationAngleX = deviationAngle*(ray2update.get_actualPos()[0]-coordinate[0])/distance2Lense;
         double deviationAngleY = deviationAngle*(ray2update.get_actualPos()[1]-coordinate[1])/distance2Lense;
 

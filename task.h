@@ -3,8 +3,7 @@
 
 #include <QImage>
 #include <QCoreApplication>
-#include "sphericalSource.h"
-#include "gravitationalLense.h"
+#include "star.h"
 #include "observer.h"
 #include "GUI/imageManipulation.h"
 
@@ -17,6 +16,7 @@
 
 using namespace std;
 
+
 class Task : public QObject
 {
     Q_OBJECT
@@ -27,12 +27,13 @@ public:
 public slots:
     void run()
     {
-        sphericalSource star(2.e30,vecteur<double,3>({0.,0.,2.4e20}),vecteur<double,3>({0.,0.,0.}),vecteur<double,3>({1.,1.,1.}),3.e11);
-        sphericalSource star2(2.e30,vecteur<double,3>({0.,0.,2.4e20}),vecteur<double,3>({0.,0.,0.}),vecteur<double,3>({1.,1.,1.}),3.e11);
-        gravitationalLense body(2.e30,vecteur<double,3>({0.,5.e-12,1.2e20}),vecteur<double,3>({0,0,0}));
-        Observer obs(vecteur<double,3>({0.,0.,1.}),1e-8,{DX,DY},16);
-        //obs.set_objectList({&star, &body});
-        obs.set_objectList({&star2});
+        star star1(2.e30,vecteur<double,3>({0.,0.,2.4e20}),vecteur<double,3>({0.,0.,0.}),7000,3.e11);
+        star star2(2.e30,vecteur<double,3>({0.,0.,1.2e20}),vecteur<double,3>({0.,0.,0.}),11000,3.e11);
+        sphericalSource test1(2.e30,vecteur<double,3>({0.,0.,1.2e20}),vecteur<double,3>({0.,0.,0.}),vecteur<double,3>({1.,0.,0.}),3.e11);
+        Observer obs(vecteur<double,3>({0.,0.,1.}),1e-7,{DX,DY},16);
+        obs.set_objectList({&star2, &star1});
+        //obs.set_objectList({&test1});
+
         unsigned char* image = convertImageRGB32(obs.getImage());
 
         QImage rendu(image, DX, DY, QImage::Format_RGB32);

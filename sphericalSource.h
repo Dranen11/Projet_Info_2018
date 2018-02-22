@@ -4,7 +4,7 @@
 #include "vecteur.h"
 #include "celestialBody.h"
 
-class sphericalSource : public celestialBody
+class sphericalSource : virtual public celestialBody
 {
 public:
     sphericalSource(double mass, vecteur<double,3> coordinate, vecteur<double,3> speed, vecteur<double,3> luminosity, double radius);
