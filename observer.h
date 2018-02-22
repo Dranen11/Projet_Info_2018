@@ -25,6 +25,7 @@ public:
 
 protected:
     void calculateImage();
+    void sortObjectList();
     void newResolution();
     void changeView();
     void testUpdate();

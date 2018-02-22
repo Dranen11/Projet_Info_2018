@@ -9,7 +9,7 @@ class sphericalSource : public celestialBody
 public:
     sphericalSource(double mass, vecteur<double,3> coordinate, vecteur<double,3> speed, vecteur<double,3> luminosity, double radius);
 
-    virtual void update_ray(ray& ray2update) const;
+    virtual void update_ray(ray& ray2update, celestialBody* next) const;
 
 protected:
     vecteur<double,3> luminosity;

@@ -14,7 +14,7 @@ public:
    virtual ~celestialBody();
 
    virtual void timeStep(double dt);
-   virtual void update_ray(ray& ray2update) const = 0;
+   virtual void update_ray(ray& ray2update, celestialBody* next) const = 0;
 
    vecteur<double,3> getCoordinate() const
    {

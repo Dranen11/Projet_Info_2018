@@ -10,29 +10,28 @@ class celestialBody;
 class ray
 {
 public:
-    ray();
-    ray(vecteur<double, 3> const& posSource, vecteur<double, 3> const& direction);
+    ray(vecteur<double, 3> const& posSource, vecteur<double, 3> const& direction, std::vector<celestialBody*> const& objectList);
 
-    vecteur<double, 3> const& get_posSource() const;
-    vecteur<double, 3> const& get_direction() const;
-    bool get_dirChangeLU() const;
+    vecteur<double, 3> const& get_initPosSource() const;
+    vecteur<double, 3> const& get_initDirection() const;
+    vecteur<double, 3> const& get_actualPos() const;
+    vecteur<double, 3> const& get_previousPos() const;
     double get_distance() const;
     void addLight(vecteur<double,3> newLight);
     vecteur<double,3> get_light() const;
 
-    void updateRay(vecteur<double, 3> const& new_posSource, vecteur<double, 3> const& new_direction);
-    void updateRay();
-    vecteur<double,3> calculateRay(std::vector<celestialBody*> objectList, std::size_t maxIter = 100);
+    void updateRay(vecteur<double, 3> const& newPos);
+    vecteur<double,3> calculateRay();
 
 
 protected:
-    void sortObjectList(std::vector<celestialBody*>& objectList, std::vector<bool>& valid, celestialBody* last);
-    double intersectPlane(vecteur<double,3> const& normal) const;
 
-    bool dirChangeLU;
     double distance;
-    vecteur<double, 3> posSource;
-    vecteur<double, 3> direction;
+    std::vector<celestialBody*> const& objectList;
+    vecteur<double, 3> previousPos;
+    vecteur<double, 3> actualPos;
+    vecteur<double, 3> initPosSource;
+    vecteur<double, 3> initDirection;
     vecteur<double, 3> light;
 };
 

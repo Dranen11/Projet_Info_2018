@@ -12,6 +12,7 @@ void Observer::set_objectList(std::vector<celestialBody*> const& newObjectList)
 {
     isUpdate = false;
     objectList = newObjectList;
+    sortObjectList();
 }
 
 std::vector<celestialBody*> Observer::get_objectList() const
@@ -96,8 +97,8 @@ void Observer::calculateImage()
             aDir[1] += yAngleRes*(static_cast<double>(j)-ny_half+0.5*yparity);
             aDir[2] += xAngleRes*(static_cast<double>(i)-nx_half+0.5*xparity);
 
-            ray lauchedRay(posSource,vecteur<double,3>::createFromAngularCoordinate(aDir));
-            image[i][j] = lauchedRay.calculateRay(objectList);
+            ray lauchedRay(posSource,vecteur<double,3>::createFromAngularCoordinate(aDir),objectList);
+            image[i][j] = lauchedRay.calculateRay();
         }
     }
 }
@@ -117,5 +118,19 @@ void Observer::testUpdate()
     for(size_t i = 0; i < objectList.size(); i++)
     {
         isUpdate = isUpdate && !(objectList[i]->get_hasChange());
+    }
+}
+
+void Observer::sortObjectList()
+{
+    for(size_t i = 0; i<objectList.size();i++)
+    {
+        for(size_t j = 0; j <(objectList.size()-i-1); j++)
+        {
+            if(objectList[j]->getCoordinate()[2] >objectList[j+1]->getCoordinate()[2])
+            {
+                std::swap<celestialBody*>(objectList[j],objectList[j+1]);
+            }
+        }
     }
 }

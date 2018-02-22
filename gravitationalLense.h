@@ -8,7 +8,7 @@ class gravitationalLense : public celestialBody
 public:
     gravitationalLense(double mass, vecteur<double,3> coordinate, vecteur<double,3> speed);
 
-    virtual void update_ray(ray& ray2update) const;
+    virtual void update_ray(ray& ray2update, celestialBody* next) const;
 };
 
 #endif // GRAVITATIONALLENSE_H
