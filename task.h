@@ -12,8 +12,8 @@
 #include <QObject>
 
 
-#define DX 3000
-#define DY 3000
+#define DX 300
+#define DY 300
 
 using namespace std;
 

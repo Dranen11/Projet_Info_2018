@@ -99,7 +99,7 @@ void Observer::calculateImage()
                     array<double,3> aDirSample = aDir;
                     aDirSample[1] += ySamplingAngleRes*(static_cast<double>(l)-sampling_half+0.5*samplingParity);;
                     aDirSample[2] += xSamplingAngleRes*(static_cast<double>(k)-sampling_half+0.5*samplingParity);;
-                    ray lauchedRay(posSource,vecteur<double,3>::createFromAngularCoordinate(aDir),objectList);
+                    ray lauchedRay(posSource,vecteur<double,3>::createFromAngularCoordinate(aDirSample),objectList);
                     image[i][j] += lauchedRay.calculateRay();
                 }
             }
