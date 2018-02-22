@@ -9,12 +9,10 @@
 class Observer
 {
 public:
-    Observer(vecteur<double, 3> pointingVector, double fov, std::array<uint32_t,2> resolution, size_t subSampling = 1);
+    Observer(vecteur<double, 3> pointingVector, double fov, std::array<uint32_t,2> resolution);
 
     void set_objectList(std::vector<celestialBody *> const& newObjectList);
     std::vector<celestialBody *> get_objectList() const;
-    void set_subSampling(size_t newSubSampling);
-    size_t get_subsampling() const;
     void set_pointingVector(vecteur<double, 3> const& newVector);
     vecteur<double, 3> get_pointingVector() const;
     std::array<uint32_t,2> get_resolution() const;
@@ -32,7 +30,6 @@ protected:
 
     double fov;
     bool isUpdate;
-    size_t subSampling;
     std::vector<celestialBody *> objectList;
     std::array<uint32_t,2> resolution;
     vecteur<double, 3> pointingVector;

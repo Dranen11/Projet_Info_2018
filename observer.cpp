@@ -3,8 +3,8 @@
 
 using namespace std;
 
-Observer::Observer(vecteur<double, 3> pointingVector, double fov, std::array<uint32_t,2> resolution, size_t subSampling)
-    :pointingVector(pointingVector), fov(fov), resolution(resolution), isUpdate(false), subSampling(max(static_cast<size_t>(1),subSampling))
+Observer::Observer(vecteur<double, 3> pointingVector, double fov, std::array<uint32_t,2> resolution)
+    :pointingVector(pointingVector), fov(fov), resolution(resolution), isUpdate(false)
 {
     newResolution();
 }
@@ -66,7 +66,7 @@ std::vector<std::vector<vecteur<double,3>>> Observer::getImage()
 void Observer::calculateImage()
 {
 
-    vecteur<double,3> posSource({0,0,0}), nullVecteur({0.,0.,0.});
+    vecteur<double,3> posSource({0,0,0});
     array<double,3> aPointer = pointingVector.getAngularCoordinate();
     double xparity = 1.-static_cast<double>(resolution[0] % 2);
     double yparity = 1.-static_cast<double>(resolution[1] % 2);
@@ -78,11 +78,6 @@ void Observer::calculateImage()
     double xAngleRes = xFov/static_cast<double>(resolution[0]);
     double yAngleRes = yFov/static_cast<double>(resolution[1]);
 
-    double samplingParity = 1.-static_cast<double>(subSampling % 2);
-    double sampling_half = static_cast<double>(subSampling/2);
-    double xSamplingAngleRes = xAngleRes/static_cast<double>(subSampling);
-    double ySamplingAngleRes = yAngleRes/static_cast<double>(subSampling);
-
     for(size_t i = 0; i < resolution[0]; i++)
     {
         for(size_t j = 0; j < resolution[1]; j++)
@@ -90,20 +85,8 @@ void Observer::calculateImage()
             array<double,3> aDir = aPointer;
             aDir[1] += yAngleRes*(static_cast<double>(j)-ny_half+0.5*yparity);
             aDir[2] += xAngleRes*(static_cast<double>(i)-nx_half+0.5*xparity);
-            image[i][j]= nullVecteur;
-
-            for(size_t k = 0; k < subSampling; k++)
-            {
-                for(size_t l = 0; l < subSampling; l++)
-                {
-                    array<double,3> aDirSample = aDir;
-                    aDirSample[1] += ySamplingAngleRes*(static_cast<double>(l)-sampling_half+0.5*samplingParity);;
-                    aDirSample[2] += xSamplingAngleRes*(static_cast<double>(k)-sampling_half+0.5*samplingParity);;
-                    ray lauchedRay(posSource,vecteur<double,3>::createFromAngularCoordinate(aDir),objectList);
-                    image[i][j] += lauchedRay.calculateRay();
-                }
-            }
-            image[i][j] /= static_cast<double>(subSampling*subSampling);
+            ray lauchedRay(posSource,vecteur<double,3>::createFromAngularCoordinate(aDir),objectList);
+            image[i][j] = lauchedRay.calculateRay();
         }
     }
 }
@@ -138,19 +121,4 @@ void Observer::sortObjectList()
             }
         }
     }
-}
-
-void Observer::set_subSampling(size_t newSubSampling)
-{
-    if(subSampling != newSubSampling)
-    {
-        subSampling = max(static_cast<size_t>(1),newSubSampling);
-        isUpdate = false;
-    }
-}
-
-
-size_t Observer::get_subsampling() const
-{
-    return subSampling;
 }
