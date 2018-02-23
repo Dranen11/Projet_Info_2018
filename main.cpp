@@ -3,10 +3,6 @@
 #include "GUI/displaywindow.h"
 #include "GUI/selectionwindow.h"
 
-#include <QCoreApplication>
-#include "task.h"
-
-
 int main (int argc, char *argv[])
 {
     QApplication a(argc, argv); //object which manage the event loop
@@ -15,6 +11,11 @@ int main (int argc, char *argv[])
     return a.exec();
 }
 
+
+/*
+#include <QCoreApplication>
+#include "task.h"
+*/
 
 //Testing purpose
 /*

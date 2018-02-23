@@ -1,6 +1,7 @@
 #include "star.h"
 #include <cmath>
 
+//for console output
 #include <QtCore>
 #include <QObject>
 
