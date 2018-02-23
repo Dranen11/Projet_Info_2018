@@ -4,6 +4,7 @@
 #include <cmath>
 #include <array>
 
+//define a vector
 template<typename T, std::size_t N>
 class vecteur : public std::array<T,N>
 {
@@ -22,10 +23,13 @@ public:
     static T scalarProduct(vecteur<T,N> const& A, vecteur<T,N> const& B);
     static vecteur<T,N> vectorProduct(vecteur<T,N> const& A, vecteur<T,N> const& B);
     static vecteur<T,N> createFromPolarCoordinate(std::array<T,N> const& coordinate);
+    static vecteur<T,N> createFromAngularCoordinate(std::array<T,N> const& coordinate);
 
     void changeBase(std::array<vecteur<T,N>,N> base);
     void setPolarCoordinate(std::array<T,N> const& coordinate);
+    void setAngularCoordinate(std::array<T,N> const& coordinate);
     std::array<T,N> getPolarCoordinate() const;
+    std::array<T,N> getAngularCoordinate() const;
 
     T sum() const;
     T max() const;
@@ -61,6 +65,14 @@ vecteur<T,N> vecteur<T,N>::createFromPolarCoordinate(std::array<T,N> const& coor
 {
     vecteur<T,N> result;
     result.setPolarCoordinate(coordinate);
+    return result;
+}
+
+template<typename T, std::size_t N>
+vecteur<T,N> vecteur<T,N>::createFromAngularCoordinate(std::array<T,N> const& coordinate)
+{
+    vecteur<T,N> result;
+    result.setAngularCoordinate(coordinate);
     return result;
 }
 

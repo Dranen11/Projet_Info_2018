@@ -26,7 +26,7 @@ unsigned char* convertImageRGB32(std::vector<std::vector<vecteur<double,3>>> con
     {
         for(size_t j =  0; j < n_column; j++)
         {
-            vecteur<double, 3> color = calculateColor(image[i][j], luminosity[i][j]);
+            vecteur<double, 3> color = calculateColor(image[i][j]);
             for(size_t k = 0; k < 3; k++)
             {
                final_image[i*n_column*4+j*4+k] = static_cast<unsigned char>(255.*color[k]*((luminosity[i][j]-min)/(max-min)));
@@ -37,8 +37,6 @@ unsigned char* convertImageRGB32(std::vector<std::vector<vecteur<double,3>>> con
 
     return final_image;
 }
-
-
 
 void imageMinMax(const vector<vector<double>> & luminosity, double &min, double &max)
 {
@@ -70,9 +68,7 @@ vector<vector<double>> calculateLuminosity(vector<vector<vecteur<double,3>>> con
     return luminosity;
 }
 
-vecteur<double, 3> calculateColor(vecteur<double,3> const& cluminosity, double const& totalLuminosity)
+vecteur<double, 3> calculateColor(vecteur<double,3> const& cluminosity)
 {
-    vecteur<double,3> result = cluminosity/totalLuminosity;
-    result /= result.max();
-    return result;
+    return cluminosity/cluminosity.max();
 }

@@ -1,0 +1,6 @@
+Need Qt 4.8, gcc, and OpenMP for compiling
+GitHub Project : https://github.com/Dranen11/Projet_Info_2018
+To compile and execute:
+qmake
+make
+./ProjetM1

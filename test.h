@@ -3,6 +3,7 @@
 
 #include "vecteur.h"
 
+//for testing vecteur
 void test_vecteur(std::size_t nPASS);
 void test_vecteurPolarCoordinate(std::size_t nPASS);
 void test_vecteurOperator(std::size_t nPASS);

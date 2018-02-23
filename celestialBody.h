@@ -2,10 +2,17 @@
 #define CELESTIALBODY_H
 
 #include "vecteur.h"
-#include "pixel.h"
+#include "ray.h"
 
-class pixel;
+//some physics constant
+#define C_G 6.67408e-11
+#define C_C 299792458.
+#define C_H 6.62606957e-34
+#define C_Kb 1.3806488e-23
 
+class ray;
+
+//abstract class in order to define an celestial object which could interact with a ray of light
 class celestialBody
 {
 public:
@@ -14,7 +21,7 @@ public:
    virtual ~celestialBody();
 
    virtual void timeStep(double dt);
-   virtual void update_pixel(pixel& pixel2update) const = 0;
+   virtual void update_ray(ray& ray2update, celestialBody* next) const = 0;
 
    vecteur<double,3> getCoordinate() const
    {

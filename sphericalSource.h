@@ -4,12 +4,13 @@
 #include "vecteur.h"
 #include "celestialBody.h"
 
-class sphericalSource : public celestialBody
+//define a spherical source
+class sphericalSource : virtual public celestialBody
 {
 public:
     sphericalSource(double mass, vecteur<double,3> coordinate, vecteur<double,3> speed, vecteur<double,3> luminosity, double radius);
 
-    virtual void update_pixel(pixel& pixel2update) const;
+    virtual void update_ray(ray& ray2update, celestialBody* next) const;
 
 protected:
     vecteur<double,3> luminosity;

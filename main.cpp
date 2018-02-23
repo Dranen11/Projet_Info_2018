@@ -1,13 +1,24 @@
 #include <iostream>
-#include <QImage>
+#include <QApplication>
+#include "GUI/displaywindow.h"
+#include "GUI/selectionwindow.h"
+
+int main (int argc, char *argv[])
+{
+    QApplication a(argc, argv); //object which manage the event loop
+    selectionWindow b;
+    b.show();
+    return a.exec();
+}
+
+
+/*
 #include <QCoreApplication>
-#include "sphericalSource.h"
-#include "gravitationalLense.h"
-#include "observer.h"
-#include "GUI/imageManipulation.h"
-
 #include "task.h"
+*/
 
+//Testing purpose
+/*
 int main (int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -23,4 +34,18 @@ int main (int argc, char *argv[])
     QTimer::singleShot(0, task, SLOT(run()));
     return a.exec();
 }
-
+*/
+/*
+int main (int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    sphericalSource star(2.e30,vecteur<double,3>({0.,0.,2.4e20}),vecteur<double,3>({0.,0.,0.}),vecteur<double,3>({1.,1.,1.}),3.e11);
+    sphericalSource star2(2.e30,vecteur<double,3>({5e12,5e12,2.4e20}),vecteur<double,3>({0.,0.,0.}),vecteur<double,3>({1.,1.,1.}),3.e11);
+    gravitationalLense body(2.e30,vecteur<double,3>({0.,0.,1.2e20}),vecteur<double,3>({0,0,0}));
+    //DisplayWindow b({&star, &body},1e-7);
+    DisplayWindow b({&star2},1e-7);
+    //DisplayWindow b({&star2, &body},1e-7);
+    b.show();
+    return a.exec();
+}
+*/
