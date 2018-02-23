@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QKeyEvent>
+#include <QTimer>
 
 #include "frameorientation.h"
 
@@ -30,6 +31,7 @@ protected slots:
     void updateFov(double newFov);
     void save();
     void timeIncrease();
+    void timeIncreaseMultipleStep();
 
 protected:
     virtual void keyPressEvent(QKeyEvent * event); //keyboard input managment
@@ -46,6 +48,10 @@ protected:
     //object for control simulation time
     QScienceSpinBox *dtBox;
     QPushButton *dtButton;
+    QSpinBox *ndtBox;
+    QPushButton *ndtButton;
+    QTimer *timer_dt;
+    size_t progress_dt;
 
     //mainImage
     QLabel *image;

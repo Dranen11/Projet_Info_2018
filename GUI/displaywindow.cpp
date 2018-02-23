@@ -38,6 +38,20 @@ DisplayWindow::DisplayWindow(vector<celestialBody *> const& listObject, double f
     connect(dtButton,SIGNAL(clicked(bool)),this,SLOT(timeIncrease()));
 
 
+    ndtBox = new QSpinBox;
+    ndtBox->setPrefix("x : ");
+    ndtBox->setMinimum(0);
+    ndtBox->setMaximum(numeric_limits<int>::max());
+    menuLayout->addWidget(ndtBox);
+    ndtButton = new QPushButton("Avancer de x pas de temps");
+    menuLayout->addWidget(ndtButton);
+    connect(ndtButton,SIGNAL(clicked(bool)),this,SLOT(timeIncreaseMultipleStep()));
+    progress_dt = 0;
+    timer_dt = new QTimer();
+    timer_dt->setInterval((int)(1000./30.));
+    connect(timer_dt,SIGNAL(timeout()),this,SLOT(timeIncrease()));
+
+
     printButton = new QPushButton("Sauvegarder");
     menuLayout->addStretch();
     menuLayout->addWidget(printButton);
@@ -51,6 +65,9 @@ DisplayWindow::DisplayWindow(vector<celestialBody *> const& listObject, double f
 DisplayWindow::~DisplayWindow()
 {
     delete orientation;
+    delete ndtBox;
+    delete ndtButton;
+    delete timer_dt;
     delete dtBox;
     delete dtButton;
     delete printButton;
@@ -133,4 +150,23 @@ void DisplayWindow::timeIncrease()
         listObject[i]->timeStep(dtBox->value());
     }
     updateImage();
+
+    //in case of multiple timestep procedure
+    if(timer_dt->isActive())
+    {
+        progress_dt++;
+        if(progress_dt >= ndtBox->value())
+        {
+            timer_dt->stop();
+        }
+    }
+}
+
+void DisplayWindow::timeIncreaseMultipleStep()
+{
+    if(!timer_dt->isActive())
+    {
+        progress_dt=0;
+        timer_dt->start();
+    }
 }
