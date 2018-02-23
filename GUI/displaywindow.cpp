@@ -27,6 +27,17 @@ DisplayWindow::DisplayWindow(vector<celestialBody *> const& listObject, double f
     connect(orientation,SIGNAL(fovChange(double)),this,SLOT(updateFov(double)));
     connect(orientation,SIGNAL(pointingChange(vecteur<double,3>)),this,SLOT(updatePointingVector(vecteur<double,3>)));
 
+    dtBox = new QScienceSpinBox;
+    dtBox->setPrefix("dt : ");
+    dtBox->setSuffix(" s");
+    dtBox->setMinimum(0);
+    dtBox->setMaximum(numeric_limits<double>::max());
+    menuLayout->addWidget(dtBox);
+    dtButton = new QPushButton("Avancer d'un pas de temps");
+    menuLayout->addWidget(dtButton);
+    connect(dtButton,SIGNAL(clicked(bool)),this,SLOT(timeIncrease()));
+
+
     printButton = new QPushButton("Sauvegarder");
     menuLayout->addStretch();
     menuLayout->addWidget(printButton);
@@ -40,6 +51,8 @@ DisplayWindow::DisplayWindow(vector<celestialBody *> const& listObject, double f
 DisplayWindow::~DisplayWindow()
 {
     delete orientation;
+    delete dtBox;
+    delete dtButton;
     delete printButton;
     delete image;
     delete menuLayout;
@@ -111,4 +124,13 @@ void DisplayWindow::save()
     dialogueSave *dialog = new dialogueSave(listObject,orientation->get_fov(),orientation->get_pointing());
     dialog->show();
     dialog->setAttribute( Qt::WA_DeleteOnClose );
+}
+
+void DisplayWindow::timeIncrease()
+{
+    for(size_t i = 0; i < listObject.size(); i++)
+    {
+        listObject[i]->timeStep(dtBox->value());
+    }
+    updateImage();
 }

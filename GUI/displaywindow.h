@@ -24,11 +24,12 @@ public:
 
 signals:
 
-public slots:
+protected slots:
     void updateImage();
     void updatePointingVector(vecteur<double,3> const& newPointingVector);
     void updateFov(double newFov);
     void save();
+    void timeIncrease();
 
 protected:
     virtual void keyPressEvent(QKeyEvent * event); //keyboard input managment
@@ -41,6 +42,10 @@ protected:
     //Object to display in the window
     QHBoxLayout *mainLayout;
     QVBoxLayout *menuLayout;
+
+    //object for control simulation time
+    QScienceSpinBox *dtBox;
+    QPushButton *dtButton;
 
     //mainImage
     QLabel *image;
