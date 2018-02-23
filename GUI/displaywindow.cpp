@@ -156,7 +156,7 @@ void DisplayWindow::timeIncrease()
     if(timer_dt->isActive())
     {
         progress_dt++;
-        if(progress_dt >= ndtBox->value())
+        if(progress_dt >= (size_t) ndtBox->value())
         {
             timer_dt->stop();
         }

@@ -42,7 +42,7 @@ selectionWindow::~selectionWindow()
     delete launchButton;
     delete buttonLayout;
 
-    for(size_t i = 0; i < starInput.size(); i++)
+    for(size_t i = 0; i < (size_t) starInput.size(); i++)
     {
         delete starInput[i];
     }
@@ -67,7 +67,7 @@ void selectionWindow::suppressStar(frameStar* star2delete)
 {
     starLayout->removeWidget(star2delete);
     starLayout->update();
-    for(size_t i = 0; i < starInput.size(); i++)
+    for(size_t i = 0; i < (size_t) starInput.size(); i++)
     {
         if(starInput[i] == star2delete)
         {
