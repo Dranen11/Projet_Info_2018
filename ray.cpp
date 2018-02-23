@@ -61,11 +61,11 @@ vecteur<double,3> ray::calculateRay()
         previousPos = initPosSource;
         actualPos = previousPos+initDirection*(objectList[0]->getCoordinate()[2]-previousPos[2])/initDirection[2];
 
-        for(size_t iter = 0; iter < (objectList.size()-1) && light.norm2() < std::numeric_limits<double>::min()*1.e6; iter++)
+        for(size_t iter = 0; iter < (objectList.size()-1) && light.norm2() < std::numeric_limits<double>::min()*1.e6; iter++) //stop if there are any light, encounter as star
         {
             objectList[iter]->update_ray(*this,objectList[iter+1]);
         }
-        if(light.norm2() < std::numeric_limits<double>::min()*1.e6)
+        if(light.norm2() < std::numeric_limits<double>::min()*1.e6) //update with the last celestialBody
         {
             objectList[(objectList.size()-1)]->update_ray(*this,NULL);
         }

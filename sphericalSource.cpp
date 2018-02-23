@@ -10,6 +10,7 @@ sphericalSource::sphericalSource(double mass, vecteur<double,3> coordinate, vect
 
 }
 
+//add some light to the ray if it impact the star
 void sphericalSource::update_ray(ray& ray2update, celestialBody* next) const
 {
     if((pow(ray2update.get_actualPos()[0]-coordinate[0],2.)+pow(ray2update.get_actualPos()[1]-coordinate[1],2.))<(radius*radius))

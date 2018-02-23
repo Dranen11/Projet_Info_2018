@@ -9,6 +9,7 @@
 #include "QScienceSpinBox.h"
 #include "vecteur.h"
 
+//class for input parameter of a star in the simulation
 class frameStar : public QGroupBox
 {
     Q_OBJECT

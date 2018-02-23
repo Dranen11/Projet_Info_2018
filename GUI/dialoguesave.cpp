@@ -20,7 +20,7 @@ dialogueSave::dialogueSave(std::vector<celestialBody *> const& listObject, doubl
     mainLayout->addWidget(xResolutionLabel,0,0);
     yResolutionLabel = new QLabel("Resolution axe Y :");
     mainLayout->addWidget(yResolutionLabel,1,0);
-    subSampleLabel = new QLabel("subSample :");
+    subSampleLabel = new QLabel("Sous-echantillonage :");
     mainLayout->addWidget(subSampleLabel,2,0);
 
     xResolutionBox = createSpinBox();

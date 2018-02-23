@@ -12,6 +12,7 @@
 #include "framestar.h"
 #include "star.h"
 
+//window for input parameter to the simulation
 class selectionWindow : public QWidget
 {
     Q_OBJECT

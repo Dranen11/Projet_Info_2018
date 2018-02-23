@@ -6,6 +6,17 @@
 #include <QCoreApplication>
 #include "task.h"
 
+
+int main (int argc, char *argv[])
+{
+    QApplication a(argc, argv); //object which manage the event loop
+    selectionWindow b;
+    b.show();
+    return a.exec();
+}
+
+
+//Testing purpose
 /*
 int main (int argc, char *argv[])
 {
@@ -37,11 +48,3 @@ int main (int argc, char *argv[])
     return a.exec();
 }
 */
-
-int main (int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    selectionWindow b;
-    b.show();
-    return a.exec();
-}

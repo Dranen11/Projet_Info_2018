@@ -6,6 +6,8 @@
 #include "gravitationalLense.h"
 #include "vecteur.h"
 
+
+//define an observer which calculate the image in fonction of the parameter
 class Observer
 {
 public:

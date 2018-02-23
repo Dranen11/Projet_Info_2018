@@ -15,7 +15,6 @@ SOURCES += main.cpp \
     gravitationalLense.cpp \
     GUI/imageManipulation.cpp \
     GUI/displaywindow.cpp \
-    GUI/form.cpp \
     GUI/frameorientation.cpp \
     GUI/QScienceSpinBox.cpp \
     star.cpp \
@@ -33,7 +32,6 @@ HEADERS += observer.h \
     GUI/imageManipulation.h \
     task.h \
     GUI/displaywindow.h \
-    GUI/form.h \
     GUI/frameorientation.h \
     GUI/QScienceSpinBox.h \
     star.h \
@@ -41,5 +39,4 @@ HEADERS += observer.h \
     GUI/selectionwindow.h \
     GUI/dialoguesave.h
 
-FORMS += \
-    GUI/form.ui
+FORMS +=

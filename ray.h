@@ -7,6 +7,7 @@
 
 class celestialBody;
 
+//define a ray of light
 class ray
 {
 public:

@@ -11,6 +11,7 @@
 
 #include "../vecteur.h"
 
+//class for controling the FOV and the orientation of the view in the simulation
 class frameOrientation : public QGroupBox
 {
     Q_OBJECT

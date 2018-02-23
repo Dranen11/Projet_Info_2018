@@ -4,6 +4,7 @@
 #include "vecteur.h"
 #include "celestialBody.h"
 
+//define a spherical source
 class sphericalSource : virtual public celestialBody
 {
 public:

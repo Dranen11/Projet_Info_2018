@@ -13,6 +13,8 @@
 #include "../celestialBody.h"
 #include "../observer.h"
 
+
+//window for visualising the simulation and interact with it
 class DisplayWindow : public QWidget
 {
     Q_OBJECT

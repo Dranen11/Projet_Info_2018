@@ -14,6 +14,7 @@ star::star(double mass, vecteur<double,3> coordinate, vecteur<double,3> speed, d
 
 }
 
+//a star is a spherical source and a gravitational lense
 void star::update_ray(ray& ray2update, celestialBody* next) const
 {
     sphericalSource::update_ray(ray2update,NULL);
@@ -26,6 +27,7 @@ inline double plankLawNormalized(double lambda, double temperature, double meanL
     return (2.*M_PI*C_H*C_C*C_C/((pow(lambda,5.))*(exp(C_H*C_C/(C_Kb*lambda*temperature))-1.)))*exp(-pow(lambda-meanLambda,2.)/(2.*stdLambda*stdLambda));
 }
 
+//calculate the RGB luminosity of a black body
 vecteur<double,3> star::blackBodyLuminosity(double temperature, double radius)
 {
     array<array<double,2>,3> lambdaLimits({array<double,2>({533e-9,30e-9}),array<double,2>({437e-9,30e-9}),array<double,2>({584e-9,30e-9})}); //in nanometer

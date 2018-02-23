@@ -4,6 +4,7 @@
 #include <cmath>
 #include <array>
 
+//define a vector
 template<typename T, std::size_t N>
 class vecteur : public std::array<T,N>
 {

@@ -58,6 +58,7 @@ void Observer::set_fov(double newFOV)
 
 std::vector<std::vector<vecteur<double,3>>> Observer::getImage()
 {
+    //if image is not up to date calculate it
     if(!isUpdate)
     {
         calculateImage();
@@ -69,6 +70,7 @@ void Observer::calculateImage()
 {
 
     vecteur<double,3> posSource({0,0,0}), nullVecteur({0.,0.,0.});
+    //value for determining a ray for a pixel
     array<double,3> aPointer = pointingVector.getAngularCoordinate();
     double xparity = 1.-static_cast<double>(resolution[0] % 2);
     double yparity = 1.-static_cast<double>(resolution[1] % 2);
@@ -80,6 +82,7 @@ void Observer::calculateImage()
     double xAngleRes = xFov/static_cast<double>(resolution[0]);
     double yAngleRes = yFov/static_cast<double>(resolution[1]);
 
+    //value for determing ray in the subsample case
     double samplingParity = 1.-static_cast<double>(subSampling % 2);
     double sampling_half = static_cast<double>(subSampling/2);
     double xSamplingAngleRes = xAngleRes/static_cast<double>(subSampling);
@@ -91,7 +94,7 @@ void Observer::calculateImage()
     {
         for(size_t j = 0; j < resolution[1]; j++)
         {
-            if(subSampling > 1)
+            if(subSampling > 1) // if subsampling is activate
             {
                 array<double,3> aDir = aPointer;
                 aDir[1] += yAngleRes*(static_cast<double>(j)-ny_half+0.5*yparity);

@@ -13,6 +13,7 @@ gravitationalLense::gravitationalLense(double mass, vecteur<double,3> coordinate
 
 }
 
+//Reference : Gravitational Microlensing in the Local Group, Bohdan Paczynski
 void gravitationalLense::update_ray(ray& ray2update, celestialBody* next) const
 {
     if(next != NULL)

@@ -4,8 +4,15 @@
 #include "vecteur.h"
 #include "ray.h"
 
+//some physics constant
+#define C_G 6.67408e-11
+#define C_C 299792458.
+#define C_H 6.62606957e-34
+#define C_Kb 1.3806488e-23
+
 class ray;
 
+//abstract class in order to define an celestial object which could interact with a ray of light
 class celestialBody
 {
 public:

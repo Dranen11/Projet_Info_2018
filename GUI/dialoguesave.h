@@ -9,6 +9,8 @@
 
 #include "celestialBody.h"
 
+
+//window for saving image of the simulation
 class dialogueSave : public QWidget
 {
     Q_OBJECT
