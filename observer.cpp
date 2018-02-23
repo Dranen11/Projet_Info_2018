@@ -97,8 +97,8 @@ void Observer::calculateImage()
             if(subSampling > 1) // if subsampling is activate
             {
                 array<double,3> aDir = aPointer;
-                aDir[1] += yAngleRes*(static_cast<double>(j)-ny_half+0.5*yparity);
-                aDir[2] += xAngleRes*(static_cast<double>(i)-nx_half+0.5*xparity);
+                aDir[2] += yAngleRes*(static_cast<double>(j)-ny_half+0.5*yparity);
+                aDir[1] += xAngleRes*(static_cast<double>(i)-nx_half+0.5*xparity);
                 image[i][j]= nullVecteur;
 
                 for(size_t k = 0; k < subSampling; k++)
@@ -106,8 +106,8 @@ void Observer::calculateImage()
                     for(size_t l = 0; l < subSampling; l++)
                     {
                         array<double,3> aDirSample = aDir;
-                        aDirSample[1] += ySamplingAngleRes*(static_cast<double>(l)-sampling_half+0.5*samplingParity);;
-                        aDirSample[2] += xSamplingAngleRes*(static_cast<double>(k)-sampling_half+0.5*samplingParity);;
+                        aDirSample[2] += ySamplingAngleRes*(static_cast<double>(l)-sampling_half+0.5*samplingParity);;
+                        aDirSample[1] += xSamplingAngleRes*(static_cast<double>(k)-sampling_half+0.5*samplingParity);;
                         ray lauchedRay(posSource,vecteur<double,3>::createFromAngularCoordinate(aDirSample),objectList);
                         image[i][j] += lauchedRay.calculateRay();
                     }
@@ -116,8 +116,8 @@ void Observer::calculateImage()
             else
             {
                 array<double,3> aDir = aPointer;
-                aDir[1] += yAngleRes*(static_cast<double>(j)-ny_half+0.5*yparity);
-                aDir[2] += xAngleRes*(static_cast<double>(i)-nx_half+0.5*xparity);
+                aDir[2] += yAngleRes*(static_cast<double>(j)-ny_half+0.5*yparity);
+                aDir[1] += xAngleRes*(static_cast<double>(i)-nx_half+0.5*xparity);
                 ray lauchedRay(posSource,vecteur<double,3>::createFromAngularCoordinate(aDir),objectList);
                 image[i][j] = lauchedRay.calculateRay();
             }

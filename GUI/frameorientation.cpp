@@ -118,22 +118,22 @@ frameOrientation::~frameOrientation()
 
 void frameOrientation::leftTurn()
 {
-    thetaBox->setValue(thetaBox->value()+PERCENT_FOV*fovBox->value());
+    phiBox->setValue(phiBox->value()+PERCENT_FOV*fovBox->value());
 }
 
 void frameOrientation::rightTurn()
 {
-    thetaBox->setValue(thetaBox->value()-PERCENT_FOV*fovBox->value());
+    phiBox->setValue(phiBox->value()-PERCENT_FOV*fovBox->value());
 }
 
 void frameOrientation::upTurn()
 {
-    phiBox->setValue(phiBox->value()+PERCENT_FOV*fovBox->value());
+    thetaBox->setValue(thetaBox->value()+PERCENT_FOV*fovBox->value());
 }
 
 void frameOrientation::downTurn()
 {
-    phiBox->setValue(phiBox->value()-PERCENT_FOV*fovBox->value());
+    thetaBox->setValue(thetaBox->value()-PERCENT_FOV*fovBox->value());
 }
 
 void frameOrientation::zoomIn()

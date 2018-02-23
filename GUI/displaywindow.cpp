@@ -7,13 +7,14 @@ using namespace std;
 DisplayWindow::DisplayWindow(vector<celestialBody *> const& listObject, double fov, QWidget *parent)
     : QWidget(parent), listObject(listObject), im(NULL)
 {
-    //Initialize pointing vector as the mean of position vector of the celestials object
-    vecteur<double, 3> pointingVector({0.,0.,0.});
+    //Initialization of the pointing vector
+    vecteur<double, 3> pointingVector({0.,0.,1.});
+    /*vecteur<double, 3> pointingVector({0.,0.,0.});
     for(size_t i =0; i < listObject.size(); i++)
-    {
+    {//Initialize pointing vector as the mean of position vector of the celestials object
         pointingVector += listObject[i]->getCoordinate()/listObject[i]->getCoordinate().norm();
     }
-    pointingVector/=pointingVector.norm();
+    pointingVector/=pointingVector.norm();*/
 
     mainLayout = new QHBoxLayout(this);
     menuLayout = new QVBoxLayout;
@@ -30,7 +31,7 @@ DisplayWindow::DisplayWindow(vector<celestialBody *> const& listObject, double f
     dtBox = new QScienceSpinBox;
     dtBox->setPrefix("dt : ");
     dtBox->setSuffix(" s");
-    dtBox->setMinimum(0);
+    dtBox->setMinimum(numeric_limits<double>::lowest());
     dtBox->setMaximum(numeric_limits<double>::max());
     menuLayout->addWidget(dtBox);
     dtButton = new QPushButton("Avancer d'un pas de temps");
