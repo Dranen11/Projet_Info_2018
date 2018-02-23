@@ -1,0 +1,5 @@
+Need Qt 4.8, gcc, and OpenMP for compiling
+To compile and execute:
+qmake
+make
+./ProjetM1
