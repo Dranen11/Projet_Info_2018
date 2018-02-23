@@ -161,3 +161,16 @@ void frameOrientation::changeFov()
     thetaBox->setSingleStep(fov*PERCENT_FOV);
     fovBox->setSingleStep(fov*FOV_VARIATION);
 }
+
+double frameOrientation::get_fov() const
+{
+    return fovBox->value();
+}
+
+vecteur<double, 3> frameOrientation::get_pointing() const
+{
+    array<double, 3> initPointer = {1.,thetaBox->value(),phiBox->value()};
+    vecteur<double, 3> result;
+    result.setAngularCoordinate(initPointer);
+    return result;
+}

@@ -18,6 +18,9 @@ public:
     explicit frameOrientation(double initFov, vecteur<double,3> initPointing, QWidget *parent = 0);
     virtual ~frameOrientation();
 
+    double get_fov() const;
+    vecteur<double, 3> get_pointing() const;
+
 signals:
     void fovChange(double fov); //emit when a new FOV is defined
     void pointingChange(vecteur<double, 3> const& pointing); //emit when the pointing vector is emit

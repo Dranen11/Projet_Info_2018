@@ -26,6 +26,7 @@ public slots:
     void updateImage();
     void updatePointingVector(vecteur<double,3> const& newPointingVector);
     void updateFov(double newFov);
+    void save();
 
 protected:
     virtual void keyPressEvent(QKeyEvent * event); //keyboard input managment

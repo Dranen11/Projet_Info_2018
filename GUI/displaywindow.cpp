@@ -1,5 +1,6 @@
 #include "displaywindow.h"
 #include "imageManipulation.h"
+#include "dialoguesave.h"
 
 using namespace std;
 
@@ -29,6 +30,7 @@ DisplayWindow::DisplayWindow(vector<celestialBody *> const& listObject, double f
     printButton = new QPushButton("Sauvegarder");
     menuLayout->addStretch();
     menuLayout->addWidget(printButton);
+    connect(printButton,SIGNAL(clicked(bool)),this,SLOT(save()));
 
     obs = new Observer(pointingVector,fov, {800,800});
     obs->set_objectList(listObject);
@@ -102,4 +104,11 @@ void DisplayWindow::updateImage()
     }
     im = convertImageRGB32(obs->getImage());
     image->setPixmap(QPixmap::fromImage(QImage(im,800,800, QImage::Format_RGB32)));
+}
+
+void DisplayWindow::save()
+{
+    dialogueSave *dialog = new dialogueSave(listObject,orientation->get_fov(),orientation->get_pointing());
+    dialog->show();
+    dialog->setAttribute( Qt::WA_DeleteOnClose );
 }

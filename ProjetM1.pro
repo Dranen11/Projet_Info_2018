@@ -18,7 +18,10 @@ SOURCES += main.cpp \
     GUI/form.cpp \
     GUI/frameorientation.cpp \
     GUI/QScienceSpinBox.cpp \
-    star.cpp
+    star.cpp \
+    GUI/framestar.cpp \
+    GUI/selectionwindow.cpp \
+    GUI/dialoguesave.cpp
 
 HEADERS += observer.h \
     vecteur.h \
@@ -33,7 +36,10 @@ HEADERS += observer.h \
     GUI/form.h \
     GUI/frameorientation.h \
     GUI/QScienceSpinBox.h \
-    star.h
+    star.h \
+    GUI/framestar.h \
+    GUI/selectionwindow.h \
+    GUI/dialoguesave.h
 
 FORMS += \
     GUI/form.ui

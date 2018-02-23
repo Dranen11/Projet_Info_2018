@@ -1,11 +1,12 @@
 #include <iostream>
 #include <QApplication>
 #include "GUI/displaywindow.h"
+#include "GUI/selectionwindow.h"
 
 #include <QCoreApplication>
 #include "task.h"
 
-
+/*
 int main (int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -21,7 +22,7 @@ int main (int argc, char *argv[])
     QTimer::singleShot(0, task, SLOT(run()));
     return a.exec();
 }
-
+*/
 /*
 int main (int argc, char *argv[])
 {
@@ -36,3 +37,11 @@ int main (int argc, char *argv[])
     return a.exec();
 }
 */
+
+int main (int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    selectionWindow b;
+    b.show();
+    return a.exec();
+}
